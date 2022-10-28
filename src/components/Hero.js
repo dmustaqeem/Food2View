@@ -22,8 +22,6 @@ import CloseIcon from '@mui/icons-material/Close'
 import Stack from '@mui/material/Stack'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 const text = require('./config.json')
-import { assetsImport } from './assetsImport'
-
 const api = api_url
 
 const Hero = (props) => {
@@ -60,7 +58,6 @@ const Hero = (props) => {
 
   for (var key of Object.keys(text)) {
    if (id == text[key].resturant) {
-    console.log(assetsImport('dawar'))
     var obj = {
      Image: text[key].Image,
      Price: text[key].price,
@@ -115,7 +112,7 @@ const Hero = (props) => {
         <div className="productsContainer">
          <div className="productC">
           <img
-           src={Image}
+           src={'./assets/Burger.png'}
            style={{ backgrondColor: '0xff00ff' }}
            className="logo"
            alt="logo"
@@ -133,18 +130,18 @@ const Hero = (props) => {
             <Button variant="contained"> Object Viewer</Button>
            </Link>
            <div>
-            <Button variant="contained" style={{ marginTop: '10px' }}>
-             <Link
+           <Link
               to={{
-               pathname: '/ARViewer',
+               pathname: '/augmentedreality',
                search: '?sort=name',
                hash: '#the-hash',
               }}
              >
+            <Button variant="contained" style={{ marginTop: '10px' }}>
               <ViewInArIcon></ViewInArIcon>
-             </Link>
              View in AR
             </Button>
+            </Link>
            </div>
           </div>
          </div>

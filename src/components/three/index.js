@@ -34,7 +34,6 @@ class Three extends React.Component {
    var height = this.mount.clientHeight / 1.5
   }
   var object = this.props.model
-  console.log(object)
   scene = new THREE.Scene()
   this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
   this.camera.position.z = 8
@@ -100,6 +99,7 @@ class Three extends React.Component {
     scale: object.scale,
     mesh: null,
    }
+   console.log(obj);
    this.gltfArr.push(obj)
   }
 
@@ -117,23 +117,24 @@ class Three extends React.Component {
   }
 
   //GLTF/GLB Loader
-  // if(this.gltfArr != null){
-  //   for (let i in this.gltfArr) {
-  //     var scale = this.gltfArr[i].scale;
-  //       var loader = new GLTFLoader();
-  //       var dracoLoader = new DRACOLoader();
-  //       loader.setDRACOLoader( dracoLoader );
-  //       loader.load(
-  //         this.state.selectedModel,
-  //         function ( gltf ) {
-  //           gltf.scene.position.set(0,0,0);
-  //           gltf.scene.scale.set(scale, scale, scale);
-  //           gltf.scene.rotation.set(0,0,0);
-  //           scene.add( gltf.scene );
-  //         }
-  //       );
-  //   }
-  // }
+  if(this.gltfArr != null){
+    for (let i in this.gltfArr) {
+      var scale = this.gltfArr[i].scale;
+        var loader = new GLTFLoader();
+        var dracoLoader = new DRACOLoader();
+        loader.setDRACOLoader( dracoLoader );
+        loader.load(
+          this.state.selectedModel,
+          function ( gltf ) {
+            gltf.scene.position.set(0,0,0);
+            gltf.scene.scale.set(scale, scale, scale);
+            gltf.scene.rotation.set(0,0,0);
+            scene.add( gltf.scene );
+            console.log(gltf);
+          }
+        );
+    }
+  }
 
   //OBJ Loader for OBJs Without MTL
   if (this.obj != null) {
