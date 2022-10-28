@@ -6,17 +6,11 @@ import * as ZapparThree from '@zappar/zappar-threejs'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import styled from 'styled-components'
 // import Burger from '../../assets/Models/burger-3d-model/source/ScannedBurger.fbx'
-import Robo from '../../assets/Models/robo.glb'
-import {Storage} from 'aws-amplify';
+import Robo from '../../assets/Models/Car.glb'
 
 class ARView extends React.Component {
  componentDidMount() {
 
-    fetch('https://food2view.s3.amazonaws.com/robo.glb')
-    .then ((response) => response.text())
-    .then (data => {
-      console.log(data)
-    });
   var width = this.mount.clientWidth
   var height = this.mount.clientHeight / 1.5
 

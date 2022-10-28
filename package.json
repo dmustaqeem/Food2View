@@ -23,7 +23,6 @@
     "@zappar/zappar": "^2.0.0",
     "@zappar/zappar-threejs": "^2.0.5",
     "airtable": "^0.11.4",
-    "aws-amplify": "^4.3.41",
     "axios": "^0.26.1",
     "bootstrap-4-react": "^0.0.59",
     "clean-webpack-plugin": "^3.0.0",
