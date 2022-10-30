@@ -112,7 +112,7 @@ const Hero = (props) => {
         <div className="productsContainer">
          <div className="productC">
           <img
-           src={'./assets/Burger.png'}
+           src={Image}
            style={{ backgrondColor: '0xff00ff' }}
            className="logo"
            alt="logo"
@@ -131,11 +131,9 @@ const Hero = (props) => {
            </Link>
            <div>
            <Link
-              to={{
-               pathname: '/augmentedreality',
-               search: '?sort=name',
-               hash: '#the-hash',
-              }}
+              to={
+                'arfoodview23.netlify.app'
+              }
              >
             <Button variant="contained" style={{ marginTop: '10px' }}>
               <ViewInArIcon></ViewInArIcon>

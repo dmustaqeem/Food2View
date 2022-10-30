@@ -8,7 +8,9 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import styled from 'styled-components'
+import { initializeApp } from 'firebase/app'
 import { WebGLRenderTarget } from 'three'
+import { getDatabase, ref, push, set } from "firebase/database";
 
 var scene
 class Three extends React.Component {
@@ -44,13 +46,31 @@ class Three extends React.Component {
   this.fbxArr = []
 
   this.renderer = new THREE.WebGLRenderer({ antialias: true })
-  this.renderer.setClearColor('#FF00FF')
+  this.renderer.setClearColor('#FFFFFF')
   this.renderer.setSize(width, height)
   this.mount.appendChild(this.renderer.domElement)
 
   this.controls = new OrbitControls(this.camera, this.renderer.domElement)
   this.controls.target.set(0, 0, 0)
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+   apiKey: 'AIzaSyD4z6orD880wzC453IwB7IJMHbDgGnOEak',
+   authDomain: 'food2view-storage.firebaseapp.com',
+   databaseURL: 'https://food2view-storage-default-rtdb.firebaseio.com',
+   projectId: 'food2view-storage',
+   storageBucket: 'food2view-storage.appspot.com',
+   messagingSenderId: '854509118316',
+   appId: '1:854509118316:web:2865aafdc9d2238a0b4949',
+  }
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig)
+  const db = getDatabase(app);
+  set(ref(db, 'users/' + '1'), {
+    username: 'd',
+    email: 'dawarmustaqeem@gmail.com'
+  });
   var model
 
   //LIGHTS
@@ -63,6 +83,12 @@ class Three extends React.Component {
   scene.add(lights[0])
   scene.add(lights[1])
   scene.add(lights[2])
+
+  // const geometry = new THREE.BoxGeometry(1, 1, 1)
+  // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+  // const cube = new THREE.Mesh(geometry, material)
+  // scene.add(cube)
+
   this.renderScene()
   this.start()
 
@@ -88,18 +114,12 @@ class Three extends React.Component {
   }
 
   if (object.type == 'glb' || object.type == 'gltf') {
-   // fetch('/assets/Models/Burger2.glb').then((response)=> {
-   //   this.setState({selectedModel: response});
-   //   console.log(this.state.selectedModel)
-   // }
-   // );
    var obj = {
     path: object.path,
     obj: object.object,
     scale: object.scale,
     mesh: null,
    }
-   console.log(obj);
    this.gltfArr.push(obj)
   }
 
@@ -117,23 +137,17 @@ class Three extends React.Component {
   }
 
   //GLTF/GLB Loader
-  if(this.gltfArr != null){
-    for (let i in this.gltfArr) {
-      var scale = this.gltfArr[i].scale;
-        var loader = new GLTFLoader();
-        var dracoLoader = new DRACOLoader();
-        loader.setDRACOLoader( dracoLoader );
-        loader.load(
-          this.state.selectedModel,
-          function ( gltf ) {
-            gltf.scene.position.set(0,0,0);
-            gltf.scene.scale.set(scale, scale, scale);
-            gltf.scene.rotation.set(0,0,0);
-            scene.add( gltf.scene );
-            console.log(gltf);
-          }
-        );
-    }
+  if (this.gltfArr != null) {
+   for (let i in this.gltfArr) {
+    var scale = this.gltfArr[i].scale
+    var loader = new GLTFLoader()
+    loader.load(this.gltfArr[i].obj, function (gltf) {
+     gltf.scene.position.set(0, 0, 0)
+     gltf.scene.scale.set(scale, scale, scale)
+     gltf.scene.rotation.set(0, 0, 0)
+     scene.add(gltf.scene)
+    })
+   }
   }
 
   //OBJ Loader for OBJs Without MTL
@@ -183,7 +197,6 @@ class Three extends React.Component {
     var zr = this.fbxArr[i].rotationZ
     const loader = new FBXLoader()
     var scale = this.fbxArr[i].scale
-    loader.setPath(this.fbxArr[i].path)
     loader.load(this.fbxArr[i].obj, function (object) {
      object.position.set(0, 0, 0)
      object.scale.set(scale, scale, scale)
@@ -232,8 +245,11 @@ const Wrapper = styled.div`
  @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
  position: relative;
  border-radius: 20px;
+ width: 100%;
+ height: 700px;
+ top: 10px;
 
- @media (max-width: 600px) {
+ @media (max-width: 500px) {
   width: 50px;
   height: 10px;
  }
