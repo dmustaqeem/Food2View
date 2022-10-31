@@ -2,8 +2,8 @@
   "repository": "#",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI= react-scripts build",
+    "start": "webpack serve --mode production --open --hot",
+    "build": "webpack --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "netlify dev"
