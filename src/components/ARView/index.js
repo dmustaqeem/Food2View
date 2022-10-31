@@ -5,16 +5,14 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import styled from 'styled-components'
-import Burger from '../../assets/Models/burger-3d-model/source/ScannedBurger.fbx'
 import { initializeApp } from 'firebase/app'
-import Robo from '../../assets/Models/robo.glb'
 import { ARButton } from '../ARButton.js'
 
 var ar, controller, model
 var scene = new THREE.Scene()
 class ARView extends React.Component {
  
- componentDidMount() {
+componentDidMount() {
 
   const container = document.createElement("div");
   document.body.appendChild(container);
@@ -32,10 +30,6 @@ class ARView extends React.Component {
 
   ar = new ARButton( this.renderer, { sessionInit: { optionalFeatures: [ 'dom-overlay' ], domOverlay: { root: document.body } } } );
 
-  var loader = new GLTFLoader()
-  loader.load(Robo, function (gltf) {
-   scene.add(gltf.scene);
-  })
 
   this.animate()
 

@@ -18,56 +18,51 @@ module.exports = {
                     loader:"babel-loader"
                 }
             },
+            // CSS
+            {
+                test: /\.(scss|css)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+
+            // Images
             {
                 test: /\.(png|jpe?g|gif|mpc|mps|mpb|cxc|cxs|cxb|tga|mtl|fbx|ico)$/i,
-                use: [
-                  {
-                    loader: 'file-loader',
-                    options:{
-                        name: '[name].[ext]',
-                        outputPath: 'assets'
-                    }
-                  },
-                ],
-              },
-              {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-              },
-              {
-                test: /\.json$/,
-                use: ['json-loader'],
-                type: 'javascript/auto'
-              },
-              {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader'
-              },
-              {
-                test: /\.(glb|gltf)$/,
                 use:
                 [
                     {
                         loader: 'file-loader',
                         options:
                         {
-                          name: '[name].[ext]',
-                          outputPath: 'assets/'
+                            outputPath: 'assets/images/'
                         }
                     }
                 ]
             },
 
             {
-                test: /\.obj/,
+                test: /\.hdr$/, 
                 use:
                 [
                     {
                         loader: 'file-loader',
                         options:
                         {
-                          name: '[name].[ext]',
-                          outputPath: 'assets/'
+                            outputPath: 'assets/images/'
+                        }
+                    }
+                ]
+            },
+
+             // Models
+             {
+                test: /\.(glb|gltf|fbx)$/,
+                use:
+                [
+                    {
+                        loader: 'file-loader',
+                        options:
+                        {
+                            outputPath: 'assets/models/'
                         }
                     }
                 ]

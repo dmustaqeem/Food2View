@@ -1,5 +1,5 @@
 import React from 'react'
-import food2view from '../assets/Food2View-logos.jpeg'
+import food2view from './assets/Food2View-logos.jpeg'
 import { Link } from 'react-router-dom'
 import { useSideContext } from '../context/sidebar_context'
 import { useUserContext } from '../context/user_context'
