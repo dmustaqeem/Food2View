@@ -132,7 +132,7 @@ const Hero = (props) => {
            <div>
            <Link
               to={
-                'https://food2view.com/ar/'
+                'ar/'
               }
              >
             <Button variant="contained" style={{ marginTop: '10px' }}>
