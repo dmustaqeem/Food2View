@@ -132,7 +132,7 @@ const Hero = (props) => {
            <div>
            <Link
               to={
-                'arfoodview23.netlify.app'
+                'https://food2view.com/ar/'
               }
              >
             <Button variant="contained" style={{ marginTop: '10px' }}>

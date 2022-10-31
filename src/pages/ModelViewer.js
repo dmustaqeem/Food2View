@@ -87,11 +87,9 @@ const ModelViewer = () => {
 
       <div className="productButtonDiv">
        <Link
-        to={{
-         pathname: '/augmentedreality',
-         search: '?sort=name',
-         hash: '#the-hash',
-        }}
+       to={
+        'https://food2view.com/ar/'
+      }
        >
         <Button variant="contained">
          {' '}
