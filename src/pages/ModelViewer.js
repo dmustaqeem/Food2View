@@ -88,7 +88,7 @@ const ModelViewer = () => {
       <div className="productButtonDiv">
        <Link
        to={
-        'ar/'
+        'ar'
       }
        >
         <Button variant="contained">
