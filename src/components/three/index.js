@@ -249,9 +249,10 @@ const Wrapper = styled.div`
  height: 700px;
  top: 10px;
 
- @media (max-width: 500px) {
-  width: 50px;
+ @media (max-width: 300px) {
+  width: 50%;
   height: 10px;
+  background-color: black;
  }
 `
 

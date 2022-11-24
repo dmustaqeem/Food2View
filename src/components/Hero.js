@@ -23,6 +23,8 @@ import Stack from '@mui/material/Stack'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 const text = require('./config.json')
 const api = api_url
+import { initializeApp } from 'firebase/app'
+import { getDatabase, ref, child, get, set } from 'firebase/database'
 
 const Hero = (props) => {
  const [products, setProducts] = useState([])
@@ -53,15 +55,16 @@ const Hero = (props) => {
  async function handleToggle(id, location, url) {
   var obj = { Name: id, Location: location, URL: url }
   setSelectedRes(obj)
-  // const text = 'https://arapif2v.netlify.app/api/airtable'
   var arr = []
 
   for (var key of Object.keys(text)) {
    if (id == text[key].resturant) {
     var obj = {
+     Number: text[key].number,
      Image: text[key].Image,
      Price: text[key].price,
      ModelName: text[key].Name,
+     Resturant: text[key].resturant
     }
     arr.push(obj)
    }
@@ -72,6 +75,21 @@ const Hero = (props) => {
   props.func('hidden')
   setOpen(!open)
  }
+
+ // Your web app's Firebase configuration
+ const firebaseConfig = {
+  apiKey: 'AIzaSyD4z6orD880wzC453IwB7IJMHbDgGnOEak',
+  authDomain: 'food2view-storage.firebaseapp.com',
+  databaseURL: 'https://food2view-storage-default-rtdb.firebaseio.com',
+  projectId: 'food2view-storage',
+  storageBucket: 'food2view-storage.appspot.com',
+  messagingSenderId: '854509118316',
+  appId: '1:854509118316:web:2865aafdc9d2238a0b4949',
+ }
+
+ // Initialize Firebase
+ const app = initializeApp(firebaseConfig)
+ const db = getDatabase()
 
  const card = (
   <React.Fragment>
@@ -107,7 +125,7 @@ const Hero = (props) => {
 
      <Stack direction="column" spacing={2} style={{ padding: '2rem' }}>
       {modelsRes.map((modelsRes) => {
-       const { Image, Price, ModelName } = modelsRes
+       const { Number, Image, Price, ModelName, Resturant } = modelsRes
        return (
         <div className="productsContainer">
          <div className="productC">
@@ -130,16 +148,38 @@ const Hero = (props) => {
             <Button variant="contained"> Object Viewer</Button>
            </Link>
            <div>
-           <Link
-              to={
-                'ar/'
-              }
+           
+             <Button
+              onClick={function (event) {
+              //  const reference = ref(db,'objects/'+'2');
+              //  set(reference,{
+              //   Desciption: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex.",
+              //   Image: "Burger.png",
+              //   Meal: "Meal 2",
+              //   Model: "Platter",
+              //   tyoe: "glb",
+              //   Price: "8.99",
+              //   Resturant: "El Vez",
+              //   Rotation: "0",
+              //   Scale: "2"
+              //  })
+
+               const reference = ref(db,'selected/');
+               set(reference,{
+                Selected: ModelName + "+"+ Resturant
+               })
+
+               var win = window.open('/ar', '_blank');
+               win.focus();
+
+              }}
+              variant="contained"
+              style={{ marginTop: '10px' }}
              >
-            <Button variant="contained" style={{ marginTop: '10px' }}>
               <ViewInArIcon></ViewInArIcon>
-             View in AR
-            </Button>
-            </Link>
+              View in AR
+             </Button>
+             
            </div>
           </div>
          </div>
@@ -199,10 +239,8 @@ const Hero = (props) => {
          </div>
          <div className="cardBelow">
           <div className="location">
-           <div style={{color:'red'}}>Location</div>
-           <div>
-            {location}
-           </div>
+           <div style={{ color: 'red' }}>Location</div>
+           <div>{location}</div>
           </div>
 
           <div className="menuButton">
@@ -232,11 +270,11 @@ const CardWrapper = styled.section`
  display: block;
  align-items: center;
  justify-content: center;
- width: 80%;
- height: 80%;
+ width: 98%;
+ height: 98%;
  position: absolute;
- top: 10%;
- left: 10%;
+ top: 1%;
+ left: 1%;
  overflow-y: auto;
  overflow-x: hidden;
  background-color: white;

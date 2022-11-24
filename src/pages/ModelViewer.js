@@ -12,12 +12,12 @@ import Button from '@mui/material/Button'
 import ViewInArIcon from '@mui/icons-material/ViewInAr'
 import CloseIcon from '@mui/icons-material/Close'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-  Link,
- } from 'react-router-dom'
+ BrowserRouter as Router,
+ Switch,
+ Route,
+ useHistory,
+ Link,
+} from 'react-router-dom'
 
 const ModelViewer = () => {
  const [open, setOpen] = React.useState(false)
@@ -86,16 +86,22 @@ const ModelViewer = () => {
       </div>
 
       <div className="productButtonDiv">
-       <Link
-       to={
-        'ar'
-      }
-       >
-        <Button variant="contained">
-         {' '}
-         Try in AR <ViewInArIcon></ViewInArIcon>
+       <a href="https://food2view.com/ar/" target="_blank" rel="noreferrer">
+        <Button
+         onClick={function (event) {
+          const reference = ref(db, 'objects/' + '1')
+          set(reference, {
+           modelName: ModelName,
+           resturantName: Resturant,
+          })
+         }}
+         variant="contained"
+         style={{ marginTop: '10px' }}
+        >
+         <ViewInArIcon></ViewInArIcon>
+         Try In AR
         </Button>
-       </Link>
+       </a>
       </div>
      </div>
 
