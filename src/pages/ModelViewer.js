@@ -5,6 +5,8 @@ import { Suspense } from 'react'
 import Three from '../components/three'
 import text from '../components/config.json'
 import { useLocation } from 'react-router-dom'
+import { initializeApp } from 'firebase/app'
+import { getDatabase, ref, child, get, set } from 'firebase/database'
 import FullscreenIcon from '@mui/icons-material/Fullscreen'
 import Backdrop from '@mui/material/Backdrop'
 import Card from '@mui/material/Card'
@@ -88,13 +90,13 @@ const ModelViewer = () => {
       <div className="productButtonDiv">
        <a href="https://food2view.com/ar/" target="_blank" rel="noreferrer">
         <Button
-         onClick={function (event) {
-          const reference = ref(db, 'objects/' + '1')
-          set(reference, {
-           modelName: ModelName,
-           resturantName: Resturant,
-          })
-         }}
+        //  onClick={function (event) {
+        //   const reference = ref(db, 'objects/' + '1')
+        //   set(reference, {
+        //    modelName: ModelName,
+        //    resturantName: Resturant,
+        //   })
+         //}}
          variant="contained"
          style={{ marginTop: '10px' }}
         >

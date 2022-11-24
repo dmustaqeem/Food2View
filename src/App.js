@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Home, About, ErrorPage, ModelViewer, Menu, AugmentedReality } from './pages/Index'
+import { Home, About, ErrorPage, ModelViewer, Menu } from './pages/Index'
 import { Navbar, Sidebar, Geolocation, Footer } from './components'
 
 function App() {
@@ -18,9 +18,6 @@ function App() {
     </Route>
     <Route path="/modelviewer">
     <ModelViewer/>
-   </Route>
-   <Route path="/augmentedreality">
-    <AugmentedReality/>
    </Route>
 
    <Route path="/menu">

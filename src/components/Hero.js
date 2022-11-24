@@ -11,6 +11,8 @@ import {
  useHistory,
  Link,
 } from 'react-router-dom'
+import { initializeApp } from 'firebase/app'
+import { getDatabase, ref, child, get, set } from 'firebase/database'
 import Backdrop from '@mui/material/Backdrop'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
@@ -23,8 +25,7 @@ import Stack from '@mui/material/Stack'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 const text = require('./config.json')
 const api = api_url
-import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, child, get, set } from 'firebase/database'
+
 
 const Hero = (props) => {
  const [products, setProducts] = useState([])

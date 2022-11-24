@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
@@ -9,7 +8,6 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import styled from 'styled-components'
 import { initializeApp } from 'firebase/app'
-import { WebGLRenderTarget } from 'three'
 import { getDatabase, ref, push, set } from "firebase/database";
 
 var scene
@@ -84,10 +82,6 @@ class Three extends React.Component {
   scene.add(lights[1])
   scene.add(lights[2])
 
-  // const geometry = new THREE.BoxGeometry(1, 1, 1)
-  // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-  // const cube = new THREE.Mesh(geometry, material)
-  // scene.add(cube)
 
   this.renderScene()
   this.start()
@@ -118,6 +112,9 @@ class Three extends React.Component {
     path: object.path,
     obj: object.object,
     scale: object.scale,
+    rotX: object.rotX,
+    rotY: object.rotY,
+    rotZ: object.rotZ,
     mesh: null,
    }
    this.gltfArr.push(obj)
@@ -140,11 +137,14 @@ class Three extends React.Component {
   if (this.gltfArr != null) {
    for (let i in this.gltfArr) {
     var scale = this.gltfArr[i].scale
+    var rotX = this.gltfArr[i].rotX;
+    var rotY = this.gltfArr[i].rotY;
+    var rotZ = this.gltfArr[i].rotZ;
     var loader = new GLTFLoader()
     loader.load(this.gltfArr[i].obj, function (gltf) {
      gltf.scene.position.set(0, 0, 0)
      gltf.scene.scale.set(scale, scale, scale)
-     gltf.scene.rotation.set(0, 0, 0)
+     gltf.scene.rotation.set(rotX, rotY, rotZ)
      scene.add(gltf.scene)
     })
    }
