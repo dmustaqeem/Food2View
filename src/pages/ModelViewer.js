@@ -40,6 +40,7 @@ const ModelViewer = () => {
   }
  }
 
+
  //
 
  const card = (
@@ -52,6 +53,8 @@ const ModelViewer = () => {
    </CardWrapper>
   </React.Fragment>
  )
+
+ 
 
  return (
   <main>
@@ -115,10 +118,12 @@ const ModelViewer = () => {
 }
 
 const CanvasSt = styled.section`
- width: 100%;
+ width: 99%;
+ height: 500px;
+ position: relative;
  display: inline-block;
  border-radius: var(--radius);
- height: 500px;
+ background-color: aliceblue;
  object-fit: cover;
  border-radius: 20px;
  box-shadow: inset 0 0 0 2px rgb(255, 255, 255),

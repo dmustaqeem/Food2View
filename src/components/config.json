@@ -1,11 +1,10 @@
 {
     "Meal 1": {
         "number": "1",
-        "id" : "Burger",
+        "id" : "Meal 1",
         "Image": "./assets/Burger.png",
         "Name": "Meal 1",
         "type": "glb",
-        "path": "assets/",
         "mtl": "",
         "object": "./assets/Models/burger.glb",
         "scale" : "0.5",
@@ -19,11 +18,10 @@
 
     "Meal 2": {
         "number": "1",
-        "id" : "Burger",
-        "Image": "./assets/Burger.png",
+        "id" : "Meal 2",
+        "Image": "./assets/Platter.png",
         "Name": "Meal 2",
         "type": "glb",
-        "path": "./assets/",
         "mtl": "",
         "object": "./assets/Models/Platter.glb",
         "scale" : "1",
@@ -39,11 +37,10 @@
 
     "Burger Por": {
         "number": "2",
-        "id" : "Burger",
+        "id" : "Burger Por",
         "Image": "./assets/Burger.png",
         "Name": "Burger Por",
         "type": "glb",
-        "path": "assets/",
         "mtl": "",
         "object": "./assets/Models/burger.glb",
         "scale" : "2",
@@ -57,11 +54,10 @@
 
     "Burger 2 Por": {
         "number": "2",
-        "id" : "Burger",
-        "Image": "./assets/Burger.png",
+        "id" : "Burger 2 Por",
+        "Image": "./assets/Platter.png",
         "Name": "Burger 2 Por",
         "type": "glb",
-        "path": "assets/Models/",
         "mtl": "",
         "object": "./assets/Models/Platter.glb",
         "scale" : "1",
@@ -76,11 +72,10 @@
     
     "Burger 2": {
         "number": "2",
-        "id" : "Burger",
+        "id" : "Burger 2",
         "Image": "./assets/Burger.png",
         "Name": "Burger 2",
         "type": "glb",
-        "path": "./assets/Models/",
         "mtl": "",
         "object": "./assets/Models/burger.glb",
         "scale" : "2",
@@ -93,11 +88,10 @@
 
     "Burger 3": {
         "number": "1",
-        "id" : "Burger",
-        "Image": "./assets/Burger.png",
+        "id" : "Burger 3",
+        "Image": "./assets/Platter.png",
         "Name": "Burger 3",
         "type": "glb",
-        "path": "assets/Models/",
         "mtl": "",
         "object": "./assets/Models/Platter.glb",
         "scale" : "1",

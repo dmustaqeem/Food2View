@@ -23,19 +23,21 @@ class Three extends React.Component {
 
  componentDidMount() {
   if (this.props.status == 'none') {
-   var width = this.mount.clientWidth
-   var height = this.mount.clientHeight / 1.5
-   if (window.innerWidth <= 800) {
-    width = 500
-    height = 400
-   }
+   this.width = this.mount.clientWidth;
+   this.height = this.mount.clientHeight;
+  //  console.log("Width is:  " + this.mount.clientWidth);
+  //  console.log("Height is:  " + this.mount.clientHeight);
+  //  if (window.innerWidth <= 800) {
+  //   this.width = 300
+  //   this.height = 400
+  //  }
   } else {
-   var width = this.mount.clientWidth
-   var height = this.mount.clientHeight / 1.5
+   this.width = this.mount.clientWidth
+   this.height = this.mount.clientHeight / 1.5
   }
   var object = this.props.model
   scene = new THREE.Scene()
-  this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
+  this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 1000)
   this.camera.position.z = 8
   this.camera.position.y = 5
   this.objMTL = []
@@ -45,11 +47,12 @@ class Three extends React.Component {
 
   this.renderer = new THREE.WebGLRenderer({ antialias: true })
   this.renderer.setClearColor('#FFFFFF')
-  this.renderer.setSize(width, height)
+  this.renderer.setSize(this.width, this.height)
   this.mount.appendChild(this.renderer.domElement)
 
   this.controls = new OrbitControls(this.camera, this.renderer.domElement)
   this.controls.target.set(0, 0, 0)
+  this.controls.enableZoom = false;
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -207,8 +210,13 @@ class Three extends React.Component {
   }
 
   this.controls.update()
-  //window.addEventListener( 'resize', this.onWindowResize, false );
+  window.addEventListener( 'resize', this.onWindowResize, false );
  }
+
+ onWindowResize(){
+  
+ }
+
  componentWillUnmount() {
   this.stop()
   this.mount.removeChild(this.renderer.domElement)
@@ -244,15 +252,13 @@ class Three extends React.Component {
 const Wrapper = styled.div`
  @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
  position: relative;
+ display: block;
+ position: relative;
  border-radius: 20px;
+ height: 100%;
  width: 100%;
- height: 700px;
- top: 10px;
 
- @media (max-width: 300px) {
-  width: 50%;
-  height: 10px;
-  background-color: black;
+ @media (max-width: 600px) {
  }
 `
 
