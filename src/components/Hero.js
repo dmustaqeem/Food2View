@@ -4,6 +4,8 @@ import { useModalContext } from '../context/modal_context'
 import { FaCamera } from 'react-icons/fa'
 import styled from 'styled-components'
 import { api_url, links } from '../utils/constants'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import {
  BrowserRouter as Router,
  Switch,
@@ -206,26 +208,32 @@ const Hero = (props) => {
   } else {
    overlayStatus = <div></div>
   }
+
+
+  //Old Seach box
+
+//   <input
+//   type="text"
+//   name="text"
+//   placeholder="search"
+//   className="search-input"
+//   value="search"
+//  />
+
+  //=============
   return (
    <Wrapper>
     {overlayStatus}
-    <div className="form-control">
-     <input
-      type="text"
-      name="text"
-      placeholder="search"
-      className="search-input"
-      value="search"
-     />
+    <div>
+    
+    <TextField id="outlined-basic" label="Search" variant="outlined"  style={{width: '100%'}}/>
     </div>
 
     <div
      className={`${isModalOpen ? 'modal-overlay show-modal' : 'modal-overlay'}`}
     >
      <div className="modal-container">
-      <button className="close-modal-btn" onClick={closeModal}>
-       <FaCamera></FaCamera>
-      </button>
+     
      </div>
     </div>
     {products.map((product) => {
@@ -280,6 +288,7 @@ const CardWrapper = styled.section`
  overflow-x: hidden;
  background-color: white;
  border-radius: 20px;
+ 
 
  .closeOverlay {
   position: -webkit-sticky; /* Safari & IE */
@@ -302,7 +311,7 @@ const CardWrapper = styled.section`
  }
 
  .logo {
-  display: inline-block;
+  display: block;
   width: 350px;
   height: 150px;
  }
@@ -337,7 +346,7 @@ const CardWrapper = styled.section`
  .productsContainer {
   margin-top: 3%;
   width: 100%;
-  height: 80%;
+  height: auto;
   position: relative;
   border-radius: 10px;
   display: grid;
@@ -382,8 +391,9 @@ const CardWrapper = styled.section`
 
   .logo {
    width: 100%;
-   height: 100%;
+   height: 150px;
    margin-left: 0%;
+   display: inline-block;
   }
 
   .logoHC {
@@ -426,7 +436,7 @@ const CardWrapper = styled.section`
    width: 100%;
    max-width: 100%;
    min-width: 100%;
-   display: grid;
+   display: inline-block;
    align-items: center;
    justify-content: center;
    margin-top: 90px;

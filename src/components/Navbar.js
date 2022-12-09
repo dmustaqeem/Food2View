@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import food2view from './assets/Food2View-logos.jpeg'
 import { FaBars, FaCamera } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { links, social } from '../utils/constants'
 import { useSideContext } from '../context/sidebar_context'
 import { useModalContext } from '../context/modal_context'
+
+import Box from '@mui/material/Box'
+import Drawer from '@mui/material/Drawer'
+import Button from '@mui/material/Button'
+import List from '@mui/material/List'
+import Divider from '@mui/material/Divider'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import InboxIcon from '@mui/icons-material/MoveToInbox'
+import MailIcon from '@mui/icons-material/Mail'
 
 
 export default function Navbar() {
@@ -12,43 +25,128 @@ export default function Navbar() {
 
  const { openSidebar } = useSideContext()
 
+ //===================================
+
+ const [state, setState] = React.useState({
+    left: false,
+   })
+  
+   const toggleDrawer = (anchor, open) => (event) => {
+    if (
+     event.type === 'keydown' &&
+     (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+     return
+    }
+  
+    setState({ ...state, [anchor]: open })
+   }
+  
+   const list = (anchor) => (
+    <Box
+     sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+     role="presentation"
+     onClick={toggleDrawer(anchor, false)}
+     onKeyDown={toggleDrawer(anchor, false)}
+    >
+    <NavbarImageHolder>
+        <img
+        src={food2view}
+        alt="logo"
+        style={{ height: '150px', width: '150px' }}
+    />
+    </NavbarImageHolder>
+     <List>
+      {['Search', 'Meals', 'New Offers', 'Most Viewed'].map((text, index) => (
+       <ListItem key={text} disablePadding>
+        <ListItemButton>
+         <ListItemIcon>
+          {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+         </ListItemIcon>
+         <ListItemText primary={text} />
+        </ListItemButton>
+       </ListItem>
+      ))}
+     </List>
+     <Divider />
+     <List>
+      {['Resturants', 'Search By Location'].map((text, index) => (
+       <ListItem key={text} disablePadding>
+        <ListItemButton>
+         <ListItemIcon>
+          {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+         </ListItemIcon>
+         <ListItemText primary={text} />
+        </ListItemButton>
+       </ListItem>
+      ))}
+     </List>
+    </Box>
+   )
+
+ //===================================
+
+
+ //===============Social Media Icons===================
+//  <ul className="social-icons">
+//      {social.map((socialIcon) => {
+//       const { id, url, icon } = socialIcon
+//       return (
+//        <li key={id}>
+//         <a href={url}>{icon}</a>
+//        </li>
+//       )
+//      })}
+//     </ul>
+//     <ul className="nav-links">
+//      {links.map((link) => {
+//       const { id, text, url } = link
+//       return (
+//        <li key={id}>
+//         <Link to={url}> {text} </Link>
+//        </li>
+//       )
+//      })}
+//     </ul>
+
+//================================================================================
+
  return (
   <NavContainer>
    <div className="nav-center">
     <div className="nav-header">
-     <button type="button" className="nav-toggle" onClick={openSidebar}>
-      <FaBars className="faIcon" />
-     </button>
+    
+    <div>
+    {['left'].map((anchor) => (
+      <React.Fragment key={anchor}>
+        <Button onClick={toggleDrawer(anchor, true)}><FaBars className="faIcon"></FaBars></Button>
+        <Drawer
+          anchor={anchor}
+          open={state[anchor]}
+          onClose={toggleDrawer(anchor, false)}
+        >
+          {list(anchor)}
+        </Drawer>
+      </React.Fragment>
+    ))}
+  </div>
     </div>
 
-    <button type="button" className="camera-toggle" onClick={openModal}>
-     <FaCamera />
-    </button>
 
-    <ul className="social-icons">
-     {social.map((socialIcon) => {
-      const { id, url, icon } = socialIcon
-      return (
-       <li key={id}>
-        <a href={url}>{icon}</a>
-       </li>
-      )
-     })}
-    </ul>
-    <ul className="nav-links">
-     {links.map((link) => {
-      const { id, text, url } = link
-      return (
-       <li key={id}>
-        <Link to={url}> {text} </Link>
-       </li>
-      )
-     })}
-    </ul>
+    
    </div>
   </NavContainer>
  )
 }
+
+const NavbarImageHolder = styled.nav`
+    width: 100%;
+    height: 200px;
+    position: relative;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+`;
 
 const NavContainer = styled.nav`
  height: 5rem;
@@ -59,6 +157,11 @@ const NavContainer = styled.nav`
 
  .social-icons {
   display: none;
+ }
+ .faIcon{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
  }
  .faIcon:hover {
   opacity: 0.3;
