@@ -177,7 +177,7 @@ const Hero = (props) => {
              style={{ marginTop: '10px' }}
             >
              <ViewInArIcon></ViewInArIcon>
-             View in AR
+             View in AR Testing
             </Button>
            </div>
           </div>
