@@ -4,8 +4,8 @@ import { useModalContext } from '../context/modal_context'
 import { FaCamera } from 'react-icons/fa'
 import styled from 'styled-components'
 import { api_url, links } from '../utils/constants'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
 import {
  BrowserRouter as Router,
  Switch,
@@ -27,7 +27,6 @@ import Stack from '@mui/material/Stack'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 const text = require('./config.json')
 const api = api_url
-
 
 const Hero = (props) => {
  const [products, setProducts] = useState([])
@@ -67,7 +66,7 @@ const Hero = (props) => {
      Image: text[key].Image,
      Price: text[key].price,
      ModelName: text[key].Name,
-     Resturant: text[key].resturant
+     Resturant: text[key].resturant,
     }
     arr.push(obj)
    }
@@ -151,9 +150,8 @@ const Hero = (props) => {
             <Button variant="contained"> Object Viewer</Button>
            </Link>
            <div>
-           
-             <Button
-              onClick={function (event) {
+            <Button
+             onClick={function (event) {
               //  const reference = ref(db,'objects/'+'2');
               //  set(reference,{
               //   Desciption: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex.",
@@ -167,22 +165,25 @@ const Hero = (props) => {
               //   Scale: "2"
               //  })
 
-               const reference = ref(db,'selected/');
-               set(reference,{
-                Selected: ModelName + "+"+ Resturant
-               })
+              const reference = ref(db, 'selected/')
+              set(reference, {
+               Selected: ModelName + '+' + Resturant,
+              })
 
-               var win = window.open('/ar', '_blank');
-               win.focus();
+              var win = window.open(
+               'https://food2viewardemo.netlify.app/',
+               '_blank'
+              )
+              win.focus()
+                   }}
 
-              }}
-              variant="contained"
-              style={{ marginTop: '10px' }}
-             >
-              <ViewInArIcon></ViewInArIcon>
-              View in AR
-             </Button>
-             
+                   
+             variant="contained"
+             style={{ marginTop: '10px' }}
+            >
+             <ViewInArIcon></ViewInArIcon>
+             View in AR
+            </Button>
            </div>
           </div>
          </div>
@@ -209,32 +210,33 @@ const Hero = (props) => {
    overlayStatus = <div></div>
   }
 
-
   //Old Seach box
 
-//   <input
-//   type="text"
-//   name="text"
-//   placeholder="search"
-//   className="search-input"
-//   value="search"
-//  />
+  //   <input
+  //   type="text"
+  //   name="text"
+  //   placeholder="search"
+  //   className="search-input"
+  //   value="search"
+  //  />
 
   //=============
   return (
    <Wrapper>
     {overlayStatus}
     <div>
-    
-    <TextField id="outlined-basic" label="Search" variant="outlined"  style={{width: '100%'}}/>
+     <TextField
+      id="outlined-basic"
+      label="Search"
+      variant="outlined"
+      style={{ width: '100%' }}
+     />
     </div>
 
     <div
      className={`${isModalOpen ? 'modal-overlay show-modal' : 'modal-overlay'}`}
     >
-     <div className="modal-container">
-     
-     </div>
+     <div className="modal-container"></div>
     </div>
     {products.map((product) => {
      const { category, id, location, name, timings, url } = product
@@ -288,7 +290,6 @@ const CardWrapper = styled.section`
  overflow-x: hidden;
  background-color: white;
  border-radius: 20px;
- 
 
  .closeOverlay {
   position: -webkit-sticky; /* Safari & IE */
