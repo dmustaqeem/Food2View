@@ -170,14 +170,9 @@ const Hero = (props) => {
                Selected: ModelName + '+' + Resturant,
               })
 
-              var win = window.open(
-               'https://food2viewardemo.netlify.app/',
-               '_blank'
-              )
+              var win = window.open('https://ar.food2view.com/', '_blank')
               win.focus()
-                   }}
-
-                   
+             }}
              variant="contained"
              style={{ marginTop: '10px' }}
             >
