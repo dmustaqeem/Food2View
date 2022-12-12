@@ -150,7 +150,7 @@ const Hero = (props) => {
             <Button variant="contained"> Object Viewer</Button>
            </Link>
            <div>
-            <Button
+            {/* <Button
              onClick={function (event) {
               //  const reference = ref(db,'objects/'+'2');
               //  set(reference,{
@@ -183,7 +183,7 @@ const Hero = (props) => {
             >
              <ViewInArIcon></ViewInArIcon>
              View in AR
-            </Button>
+            </Button> */}
            </div>
           </div>
          </div>
