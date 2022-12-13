@@ -171,7 +171,7 @@ const Hero = (props) => {
               })
 
               var win = window.open(
-               'https://ar.food2view.com/ '+ '?Model=' +  ModelName + '/' + Resturant,
+               'https://ar.food2view.com/ '+ '?Model=' +  ModelName + 'Seperator' + Resturant,
                '_blank'
               )
               win.focus()
