@@ -171,7 +171,7 @@ const Hero = (props) => {
               })
 
               var win = window.open(
-               'https://food2viewardemo.netlify.app/ '+ '?id=' + 1,
+               'https://ar.food2view.com/ '+ '?id=' + 1,
                '_blank'
               )
               win.focus()
