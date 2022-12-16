@@ -54,7 +54,7 @@ const ModelViewer = () => {
   </React.Fragment>
  )
 
- 
+
 
  return (
   <main>
@@ -91,14 +91,14 @@ const ModelViewer = () => {
       </div>
 
       <div className="productButtonDiv">
-       <a href="https://food2view.com/ar/" target="_blank" rel="noreferrer">
+       <a href="ar.food2view.com" target="_blank" rel="noreferrer">
         <Button
-        //  onClick={function (event) {
-        //   const reference = ref(db, 'objects/' + '1')
-        //   set(reference, {
-        //    modelName: ModelName,
-        //    resturantName: Resturant,
-        //   })
+         //  onClick={function (event) {
+         //   const reference = ref(db, 'objects/' + '1')
+         //   set(reference, {
+         //    modelName: ModelName,
+         //    resturantName: Resturant,
+         //   })
          //}}
          variant="contained"
          style={{ marginTop: '10px' }}
