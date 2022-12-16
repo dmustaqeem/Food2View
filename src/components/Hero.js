@@ -171,13 +171,13 @@ const Hero = (props) => {
               })
 
               var win = window.open(
-               'https://food2viewardemo.netlify.app/',
+               'https://ar.food2view.com/ '+ '?Model=' +  ModelName + '/' + Resturant,
                '_blank'
               )
               win.focus()
-                   }}
+              }}
 
-
+                   
              variant="contained"
              style={{ marginTop: '10px' }}
             >
