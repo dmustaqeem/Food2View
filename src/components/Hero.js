@@ -1,10 +1,7 @@
 import React, { Purecomponent, useState, useEffect } from 'react'
-import { render } from 'react-dom'
 import { useModalContext } from '../context/modal_context'
-import { FaCamera } from 'react-icons/fa'
 import styled from 'styled-components'
 import { api_url, links } from '../utils/constants'
-import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import {
  BrowserRouter as Router,
@@ -54,7 +51,8 @@ const Hero = (props) => {
   props.func('visible')
  }
 
- async function handleToggle(id, location, url) {
+ async function handleToggle(id, location, url, contact) {
+  console.log(contact)
   var obj = { Name: id, Location: location, URL: url }
   setSelectedRes(obj)
   var arr = []
@@ -257,7 +255,7 @@ const Hero = (props) => {
           <div className="menuButton">
            <Button
             variant="contained"
-            onClick={() => handleToggle(name, location, url)}
+            onClick={() => handleToggle(name, location, url )}
            >
             {' '}
             Menu <RestaurantMenuIcon></RestaurantMenuIcon>
