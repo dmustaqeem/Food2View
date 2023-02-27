@@ -46,13 +46,13 @@ class Three extends React.Component {
   this.fbxArr = []
 
   this.renderer = new THREE.WebGLRenderer({ antialias: true })
-  this.renderer.setClearColor('#FFFFFF')
+  this.renderer.setClearColor('#D3D3D3')
   this.renderer.setSize(this.width, this.height)
   this.mount.appendChild(this.renderer.domElement)
 
   this.controls = new OrbitControls(this.camera, this.renderer.domElement)
   this.controls.target.set(0, 0, 0)
-  this.controls.enableZoom = false;
+  //this.controls.enableZoom = false;
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -88,7 +88,6 @@ class Three extends React.Component {
 
   this.renderScene()
   this.start()
-
   if (object.type == 'obj') {
    if (object.mtl == '') {
     var obj = {
@@ -255,7 +254,7 @@ const Wrapper = styled.div`
  display: block;
  position: relative;
  border-radius: 20px;
- height: 100%;
+ height: 400px;
  width: 100%;
 
  @media (max-width: 600px) {

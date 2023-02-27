@@ -2,79 +2,50 @@ import React, { Purecomponent, useState, useEffect } from 'react'
 import { useModalContext } from '../context/modal_context'
 import styled from 'styled-components'
 import { api_url, links } from '../utils/constants'
-import TextField from '@mui/material/TextField'
-import {
- BrowserRouter as Router,
- Switch,
- Route,
- useHistory,
- Link,
-} from 'react-router-dom'
+import Button from '@mui/material/Button'
+import Three from './three'
+import items from '../utils/data'
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, child, get, set } from 'firebase/database'
-import Backdrop from '@mui/material/Backdrop'
-import Button from '@mui/material/Button'
-import Card from '@mui/material/Card'
-import ViewInArIcon from '@mui/icons-material/ViewInAr'
-import CallIcon from '@mui/icons-material/Call'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import CloseIcon from '@mui/icons-material/Close'
-import Stack from '@mui/material/Stack'
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
+import Menu from './Menu'
+
+
 const text = require('./config.json')
 const api = api_url
 
 const Hero = (props) => {
- const [products, setProducts] = useState([])
- const { isModalOpen, closeModal } = useModalContext()
- const [searchInput, setSearchInput] = useState('')
- const [selectedRes, setSelectedRes] = useState([])
- const [modelsRes, setModelsRes] = useState([])
- const [mainOverflow, setMainOverflow] = useState('')
+  const [menuItems, setMenuItems] = useState(items)
+ const [hoveredIndex, setHoveredIndex] = useState(-1)
+
+ const handleMouseOver = (index) => {
+  setHoveredIndex(index)
+ }
+
+ const handleMouseOut = () => {
+  setHoveredIndex(-1)
+ }
+
+ const [selectedItem, setSelectedItem] = useState(null)
+
+ const handleItemClick = (index) => {
+  setSelectedItem(index)
+ }
+
+ const handleCloseOverlay = () => {
+  setSelectedItem(null)
+ }
 
  const fetchData = async () => {
-  setMainOverflow('visible')
   props.func('visible')
   const response = await fetch(api)
   const data = await response.json()
-  setProducts(data)
+  
  }
  useEffect(() => {
   fetchData()
  }, [])
 
- const [open, setOpen] = React.useState(false)
- function handleClose() {
-  setOpen(false)
-  setMainOverflow('visible')
-  props.func('visible')
- }
-
- async function handleToggle(id, location, url, contact) {
-  console.log(contact)
-  var obj = { Name: id, Location: location, URL: url }
-  setSelectedRes(obj)
-  var arr = []
-
-  for (var key of Object.keys(text)) {
-   if (id == text[key].resturant) {
-    var obj = {
-     Number: text[key].number,
-     Image: text[key].Image,
-     Price: text[key].price,
-     ModelName: text[key].Name,
-     Resturant: text[key].resturant,
-    }
-    arr.push(obj)
-   }
-  }
-
-  setModelsRes(arr)
-  setMainOverflow('hidden')
-  props.func('hidden')
-  setOpen(!open)
- }
+ const [open, setOpen] = React.useState(true)
 
  // Your web app's Firebase configuration
  const firebaseConfig = {
@@ -91,382 +62,23 @@ const Hero = (props) => {
  const app = initializeApp(firebaseConfig)
  const db = getDatabase()
 
- const card = (
-  <React.Fragment>
-   <CardWrapper id="style-3">
-    <div className="closeOverlay">
-     <CloseIcon onClick={handleClose}></CloseIcon>
-    </div>
-    <article>
-     <div className="headerContainer">
-      <img
-       src={selectedRes.URL}
-       className="logoHC"
-       alt="logo"
-       style={{ backgroundColor: 'black' }}
-      />
-      <div className="InfoDiv">
-       <div className="info">
-        <AccessTimeIcon></AccessTimeIcon>
-        <div className="data">2-5</div>
-       </div>
+ return (
+  <Wrapper>
+   <div className="Header">
+    <img
+     className="logoImg"
+     style={{}}
+     src="../assets/Food2View-logos.jpeg"
+     alt="logo"
+    ></img>
+   </div>
 
-       <div className="info">
-        <CallIcon></CallIcon>
-        <div className="data">111222333</div>
-       </div>
-
-       <div className="info">
-        <LocationOnIcon></LocationOnIcon>
-        <div className="data">{selectedRes.Location}</div>
-       </div>
-      </div>
-     </div>
-
-     <Stack direction="column" spacing={2} style={{ padding: '2rem' }}>
-      {modelsRes.map((modelsRes) => {
-       const { Number, Image, Price, ModelName, Resturant } = modelsRes
-       return (
-        <div className="productsContainer">
-         <div className="productC">
-          <img
-           src={Image}
-           style={{ backgrondColor: '0xff00ff' }}
-           className="logo"
-           alt="logo"
-          />
-          <div className="productTitle">{ModelName}</div>
-          <div className="productViewer">
-           <Link
-            to={{
-             pathname: '/ModelViewer',
-             search: '?sort=name',
-             hash: '#the-hash',
-             state: { name: ModelName },
-            }}
-           >
-            <Button variant="contained"> Object Viewer</Button>
-           </Link>
-           <div>
-            <Button
-             onClick={function (event) {
-              //  const reference = ref(db,'objects/'+'2');
-              //  set(reference,{
-              //   Desciption: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex.",
-              //   Image: "Burger.png",
-              //   Meal: "Meal 2",
-              //   Model: "Platter",
-              //   tyoe: "glb",
-              //   Price: "8.99",
-              //   Resturant: "El Vez",
-              //   Rotation: "0",
-              //   Scale: "2"
-              //  })
-
-              const reference = ref(db, 'selected/')
-              set(reference, {
-               Selected: ModelName + '+' + Resturant,
-              })
-
-              var win = window.open(
-               'https://ar.food2view.com/ '+ '?Model=' +  ModelName + '/' + Resturant,
-               '_blank'
-              )
-              win.focus()
-              }}
-
-                   
-             variant="contained"
-             style={{ marginTop: '10px' }}
-            >
-             <ViewInArIcon></ViewInArIcon>
-             View in AR
-            </Button>
-           </div>
-          </div>
-         </div>
-        </div>
-       )
-      })}
-     </Stack>
-    </article>
-   </CardWrapper>
-  </React.Fragment>
+   <div className="grid-container">
+      <Menu items={menuItems} />
+   </div>
+  </Wrapper>
  )
- {
-  let overlayStatus
-  if (open) {
-   overlayStatus = (
-    <Backdrop
-     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-     open={open}
-    >
-     <Card variant="outlined">{card}</Card>
-    </Backdrop>
-   )
-  } else {
-   overlayStatus = <div></div>
-  }
-
-  //Old Seach box
-
-  //   <input
-  //   type="text"
-  //   name="text"
-  //   placeholder="search"
-  //   className="search-input"
-  //   value="search"
-  //  />
-
-  //=============
-  return (
-   <Wrapper>
-    {overlayStatus}
-    <div>
-     <TextField
-      id="outlined-basic"
-      label="Search"
-      variant="outlined"
-      style={{ width: '100%' }}
-     />
-    </div>
-
-    <div
-     className={`${isModalOpen ? 'modal-overlay show-modal' : 'modal-overlay'}`}
-    >
-     <div className="modal-container"></div>
-    </div>
-    {products.map((product) => {
-     const { category, id, location, name, timings, url } = product
-
-     {
-      if (mainOverflow == 'visible') {
-       return (
-        <div className="container" key={id}>
-         <div className="card">
-          <img src={url} className="logo" alt="logo" />
-         </div>
-         <div className="cardBelow">
-          <div className="location">
-           <div style={{ color: 'red' }}>Location</div>
-           <div>{location}</div>
-          </div>
-
-          <div className="menuButton">
-           <Button
-            variant="contained"
-            onClick={() => handleToggle(name, location, url )}
-           >
-            {' '}
-            Menu <RestaurantMenuIcon></RestaurantMenuIcon>
-           </Button>
-          </div>
-
-          {}
-         </div>
-        </div>
-       )
-      }
-     }
-    })}
-   </Wrapper>
-  )
- }
 }
-
-const CardWrapper = styled.section`
- @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
- display: block;
- align-items: center;
- justify-content: center;
- width: 98%;
- height: 98%;
- position: absolute;
- top: 1%;
- left: 1%;
- overflow-y: auto;
- overflow-x: hidden;
- background-color: white;
- border-radius: 20px;
-
- .closeOverlay {
-  position: -webkit-sticky; /* Safari & IE */
-  position: sticky;
-  top: 10px;
-  margin-left: 10px;
-  cursor: pointer;
-  z-index: 1;
- }
-
- .headerContainer {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 25px;
- }
-
- .logo {
-  display: block;
-  width: 350px;
-  height: 150px;
- }
-
- .logoHC {
-  display: inline-block;
-  width: 350px;
-  height: 150px;
-  margin-left: 10%;
- }
-
- .InfoDiv {
-  width: 100%;
-  height: 90%;
-  font-size: 15px;
-  display: block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-left: 30%;
- }
- .info {
-  display: flex;
-  margin-top: 1rem;
- }
-
- .data {
-  margin-left: 50px;
-  display: inline-block;
- }
-
- .productsContainer {
-  margin-top: 3%;
-  width: 100%;
-  height: auto;
-  position: relative;
-  border-radius: 10px;
-  display: grid;
-  background-color: white;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 0 2px rgb(255, 255, 255),
-   0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
- }
-
- .productC {
-  display: flex;
- }
-
- .productTitle {
-  width: 50%;
-  height: 20%;
-  margin-left: 250px;
-  margin-top: 45px;
-  position: relative;
-  display: block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
- }
-
- .productViewer {
-  width: 50%;
-  height: 20%;
-  margin-left: 250px;
-  padding-top: 2rem;
-  position: relative;
-  display: block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
- }
-
- @media (max-width: 600px) {
-  grid-template-columns: 1fr 1fr;
-  display: inline-block;
-
-  .logo {
-   width: 100%;
-   height: 150px;
-   margin-left: 0%;
-   display: inline-block;
-  }
-
-  .logoHC {
-   width: 95%;
-   height: 125px;
-   margin-left: 0%;
-  }
-
-  .headerContainer {
-   width: 100%;
-   height: 100%;
-   position: relative;
-   display: grid;
-   align-items: center;
-   justify-content: center;
-  }
-
-  .InfoDiv {
-   font-size: 15px;
-   display: inline-block;
-   text-align: center;
-   align-items: center;
-   justify-content: center;
-   margin-left: 20px;
-   margin-top: 10%;
-  }
-  .info {
-   display: flex;
-  }
-
-  .data {
-   width: 60%;
-   margin-left: 50px;
-   text-align: left;
-   align-items: center;
-   justify-content: center;
-  }
-
-  .productsContainer {
-   width: 100%;
-   max-width: 100%;
-   min-width: 100%;
-   display: inline-block;
-   align-items: center;
-   justify-content: center;
-   margin-top: 90px;
-  }
-
-  .productC {
-   margin-top: 10px;
-   display: inline-block;
-  }
-
-  .productTitle {
-   width: 100%;
-   height: 100%;
-   display: inline-block;
-   margin-left: 0px;
-   align-items: center;
-   justify-content: center;
-   text-align: center;
-  }
-
-  .productViewer {
-   padding: 2rem;
-   width: 100%;
-   height: 100%;
-   display: inline-block;
-   margin-left: 0px;
-   align-items: center;
-   justify-content: center;
-  }
- }
-`
 
 // Styled Components
 
@@ -478,6 +90,111 @@ const Wrapper = styled.div`
  height: 100%;
  grid-gap: 5rem;
 
+.Header{
+  width:100%;
+ text-align: center;
+
+}
+.background{
+  opacity:50%;
+  background-color:black;
+  height:100%;
+  width:360px;
+}
+.item-name{
+
+  font-size: 30px;
+  color: white;
+  font-weight: 700;
+  
+}
+.hoveredContent{
+    height:300px;
+    
+  position: relative;
+    width:90%;
+    display:grid;
+    border-radius:10px;
+   
+}
+
+.hoveredContent .hoveredButtons button {
+   height:200%;
+   width:100%;
+   background-color:grey;
+   padding:5%;
+   border-radius:10px;
+   margin:auto;
+}
+
+.hoveredContent .hoveredButtons {
+  margin-top:27.5%;
+  margin-left:32.5%;
+  position: absolute;
+}
+.logoImg{
+    
+  align-content: center;
+  justify-content: center;
+  margin: auto;
+  height: 10%;
+  width: 10%;
+}
+.BWimg{
+}
+.BWimg:hover {
+  webkit-filter: blur(2px); 
+  filter: blur(2px);
+}
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.overlay {
+  
+  position: fixed; /* changed to fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height:50%;
+  width:50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; /* added z-index */
+  height:100%;
+  width:100%;
+}
+
+.overlay-content {
+  height:85%;
+  width:35%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* added z-index */
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.grid-item {
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 20),
+}
+ 
  .container__image {
   position: relative;
   display: flex;
@@ -510,13 +227,13 @@ const Wrapper = styled.div`
   opacity: 0;
   z-index: -1;
  }
- .container__image .container__info {
+ .container_image .container_info {
   position: relative;
   line-height: 1.8;
   transition: ease-in-out 0.3s;
   opacity: 0;
  }
- .container__image .container__location {
+ .container_image .container_location {
   transition-delay: 0.15s;
  }
  .container__image:hover {
@@ -532,7 +249,7 @@ const Wrapper = styled.div`
   filter: blur(10px) saturate(100%);
   transform: scale(2.8) translate3d(-18%, 0px, 0px);
  }
- .container__image:hover .container__info {
+ .container_image:hover .container_info {
   transform: translate3d(-60%, 0px, 0px);
   opacity: 1;
  }
@@ -645,14 +362,45 @@ const Wrapper = styled.div`
   }
  }
 
- img {
-  width: 240px;
-  display: block;
-  object-fit: cover;
-  height: 125px;
- }
+
 
  @media only screen and (max-width: 600px) {
+  .overlay-content{
+      height:95%;
+  width:75%;
+  position: absolute;
+  margin-left: 1%;
+  }
+  
+  .hoveredContent .hoveredButtons {
+
+      margin-top:40%;
+      margin-left:25%;
+      position: absolute;
+    }
+   
+  .overlay{
+    align-item:center;
+  }
+  .logoImg{
+    
+    alignContent: center;
+    justifyContent: center;
+    margin: auto;
+    height: 50%;
+    width: 50%;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .grid-item {
+    padding: 10px;
+    text-align: center;
+  }
+
   padding: 5rem;
   /* .card:before {
    .color {
@@ -757,102 +505,6 @@ const Wrapper = styled.div`
  /* Medium devices *landscape tablets, 768px and up) */
  @media only screen and (min-width: 768px) {
   padding: 2rem;
-  /* .card:before {
-   .color {
-    display: none;
-   }
-  } */
-
-  .linksBx {
-   display: flex;
-   justify-content: center;
-   li {
-    margin: 0 0.5rem;
-   }
-   a {
-    color: var(--clr-grey-3);
-    font-size: 0.65rem;
-    text-transform: capitalize;
-    letter-spacing: var(--spacing);
-    padding: 0.85rem;
-    &:hover {
-     border-bottom: 2px solid var(--clr-primary-7);
-    }
-   }
-  }
-  img {
-   width: 100%;
-   display: block;
-   object-fit: cover;
-   height: 125px;
-  }
- }
- /* Large devices (lapto/desktops, 992px and up) */
- @media only screen and (min-width: 992px) {
-  padding: 2rem;
-  /* .card:before {
-   .color {
-    display: none;
-   }
-  } */
-
-  .linksBx {
-   display: flex;
-   justify-content: center;
-   li {
-    margin: 0 0.5rem;
-   }
-   a {
-    color: var(--clr-grey-3);
-    font-size: 0.65rem;
-    text-transform: capitalize;
-    letter-spacing: var(--spacing);
-    padding: 0.85rem;
-    &:hover {
-     border-bottom: 2px solid var(--clr-primary-7);
-    }
-   }
-  }
-
-  img {
-   width: 100%;
-   display: block;
-   object-fit: cover;
-   height: 125px;
-  }
- }
- /* Extra large devices (large laptops and desktops, 1200px and up) */
- @media only screen and (min-width: 1200px) {
-  padding: 2rem;
-  /* .card:before {
-   .color {
-    display: none;
-   }
-  } */
-
-  .linksBx {
-   display: flex;
-   justify-content: center;
-   li {
-    margin: 0 0.5rem;
-   }
-   a {
-    color: var(--clr-grey-3);
-    font-size: 0.65rem;
-    text-transform: capitalize;
-    letter-spacing: var(--spacing);
-    padding: 0.85rem;
-    &:hover {
-     border-bottom: 2px solid var(--clr-primary-7);
-    }
-   }
-  }
-  img {
-   width: 100%;
-   display: block;
-   object-fit: cover;
-   height: 125px;
-  }
  }
 `
 export default Hero

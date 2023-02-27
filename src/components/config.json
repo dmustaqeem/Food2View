@@ -1,41 +1,5 @@
-{
-    "Meal 1": {
-        "number": "1",
-        "id" : "Meal 1",
-        "Image": "./assets/Burger.png",
-        "Name": "Meal 1",
-        "type": "glb",
-        "mtl": "",
-        "object": "./assets/Models/burger.glb",
-        "scale" : "0.5",
-        "rotX" : "-0.3",
-        "rotY" : "-0.1",
-        "rotZ" : "0",
-        "resturant": "Por Do Sol",
-        "price": "7.99",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
-
-    "Meal 2": {
-        "number": "1",
-        "id" : "Meal 2",
-        "Image": "./assets/Platter.png",
-        "Name": "Meal 2",
-        "type": "glb",
-        "mtl": "",
-        "object": "./assets/Models/Platter.glb",
-        "scale" : "1",
-        "rotX" : "0",
-        "rotY" : "0",
-        "rotZ" : "0",
-        "resturant": "Por Do Sol",
-        "price": "7.99",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
-
-
-
-    "Cupcake": {
+[
+    {
         "number": "2",
         "id" : "Cupcake",
         "Image": "./assets/Cupcake.png",
@@ -51,10 +15,9 @@
         "rotZ" : "0",
         "resturant": "Por Do Sol",
         "price": "10",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
+        "Description": "Lorem ipsum dolor sit amet"},
 
-    "Chicken Plate": {
+    {
         "number": "2",
         "id" : "Chicken Plate",
         "Image": "./assets/Chiken Plate.png",
@@ -70,10 +33,9 @@
         "rotZ" : "0",
         "resturant": "Por Do Sol",
         "price": "10",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
+        "Description": "Lorem ipsum dolor sit amet"},
 
-    "Meatballs Plate": {
+    {
         "number": "2",
         "id" : "Meatballs Plate",
         "Image": "./assets/Meat Balls Plate.png",
@@ -89,10 +51,9 @@
         "rotZ" : "0",
         "resturant": "Por Do Sol",
         "price": "10",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
+        "Description": "Lorem ipsum dolor sit amet"},
 
-    "Salmon Tartine": {
+    {
         "number": "1",
         "id" : "Salmon Tartine",
         "Image": "./assets/Salmon Tartine.png",
@@ -108,10 +69,9 @@
         "rotZ" : "0",
         "resturant": "Por Do Sol",
         "price": "10",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
+        "Description": "Lorem ipsum dolor sit amet"},
 
-    "Wood Board Rib": {
+    {
         "number": "1",
         "id" : "Wood Board Rib",
         "Image": "./assets/Wood Board Rib.png",
@@ -128,10 +88,9 @@
         "rotZ" : "0",
         "resturant": "Por Do Sol",
         "price": "10",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    },
+        "Description": "Lorem ipsum dolor sit amet"},
 
-    "Joia Ribs": {
+    {
         "number": "1",
         "id" : "Joia Ribs",
         "Image": "./assets/Joia Ribs.png",
@@ -148,6 +107,40 @@
         "rotZ" : "0",
         "resturant": "Por Do Sol",
         "price": "10",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tincidunt lorem. Ut leo risus, pretium quis ligula nec, aliquam laoreet quam. Quisque semper ipsum diam, sit amet bibendum tellus bibendum et. Quisque vulputate commodo ex in pellentesque. Nunc et porta orci, sit amet gravida nunc. Suspendisse potenti. Nulla et erat sed ipsum dignissim blandit. Praesent eu ex consectetur, congue erat at, ornare ex."
-    }
-}
+        "Description": "Lorem ipsum dolor sit amet"},
+     {
+        
+        "number": "1",
+        "id" : "Meal 1",
+        "Image": "./assets/Burger.png",
+        "Name": "Meal 1",
+        "type": "glb",
+        "mtl": "",
+        "object": "./assets/Models/burger.glb",
+        "scale" : "0.5",
+        "rotX" : "-0.3",
+        "rotY" : "-0.1",
+        "rotZ" : "0",
+        "resturant": "Por Do Sol",
+        "price": "7.99",
+        "Description": "Lorem ipsum dolor sit amet"
+    },
+
+    {
+        "number": "1",
+        "id" : "Meal 2",
+        "Image": "./assets/Platter.png",
+        "Name": "Meal 2",
+        "type": "glb",
+        "mtl": "",
+        "object": "./assets/Models/Platter.glb",
+        "scale" : "1",
+        "rotX" : "0",
+        "rotY" : "0",
+        "rotZ" : "0",
+        "resturant": "Por Do Sol",
+        "price": "7.99",
+        "Description": "Lorem ipsum dolor sit amet"}
+
+
+]

@@ -6,7 +6,6 @@ import { Navbar, Sidebar, Geolocation, Footer } from './components'
 function App() {
  return (
   <Router>
-   <Navbar />
 
    <Sidebar />
    <Switch>
