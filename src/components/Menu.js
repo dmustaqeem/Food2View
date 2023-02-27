@@ -10,6 +10,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Backdrop from '@mui/material/Backdrop';
 import Three from './three/index'
 import CloseIcon from '@mui/icons-material/Close';
+import Grid from '@mui/material/Grid';
 const theme = createTheme({
     palette: {
         neutral: {
@@ -427,10 +428,17 @@ font-family: "Roboto Condensed", sans-serif;
   @media (min-width: 992px) {
   }
   @media screen and (min-width: 1200px) {
-    .section-center {
-      width: 95vw;
-      grid-template-columns: 1fr 1fr;
+    .sectionCenter {
+      width: 100%;
+      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     }
+    /* .sectionCenter {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    background-color: var(--blue);
+    color: cornsilk;
+  } */
 
     .photo {
       height: 150px;
