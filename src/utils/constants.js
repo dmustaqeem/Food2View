@@ -71,6 +71,8 @@ export const social = [
   icon: <FaYoutube />,
  },
 ]
+
+export var Resturants = [];
 export const products_url = 'https://course-api.com/react-store-products'
 export const api_url = 'https://apif2v.netlify.app/api/airtable'
 export const single_product_url = `https://course-api.com/react-store-single-product?id=`

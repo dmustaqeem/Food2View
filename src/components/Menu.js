@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 // import SingleItem from './SingleItem'
@@ -11,6 +11,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Three from './three/index'
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
+import { api_url, Resturants } from '../utils/constants';
 const theme = createTheme({
     palette: {
         neutral: {
@@ -21,8 +22,10 @@ const theme = createTheme({
 });
 
 const Menu = ({ items }) => {
+
     const [open, setOpen] = React.useState(false);
     const [values, setValues] = React.useState();
+    const [resturant, setResturant] = React.useState();
     const handleClose = () => {
         setOpen(false);
     };
@@ -31,12 +34,27 @@ const Menu = ({ items }) => {
     };
 
 
+    async function fetchData () {
+      return fetch(api_url)
+            .then((response) => response.json())
+            .then((data) => {Resturants[0] = data});
+    }
+
+    function restValue(){
+      for (var key of Object.keys(Resturants[0])) {
+        if(values.resturant === Resturants[0][key].name){
+          setResturant(Resturants[0][key].url)
+        }
+      }
+    }
+
+
     function renderCard() {
         if (open == true) {
             return (<CardWrapper>
                 <div className='close-icon'><CloseIcon style={{ color: 'black', cursor: 'pointer' }} onClick={handleClose} /></div>
                 <div className='header'>
-                    <h1 className='meal-name'>{values.Name}</h1>
+                    <img className='meal-name' src={resturant}/>
                 </div>
                 <div className='model-holder'>
                     <Three status="full" model={values} />
@@ -53,6 +71,11 @@ const Menu = ({ items }) => {
             </CardWrapper>)
         }
     }
+
+
+    useEffect(() => {
+      fetchData();
+    },[])
 
 
 
@@ -87,6 +110,7 @@ const Menu = ({ items }) => {
                                     <InfoIcon onClick={() => {
                                         handleToggle()
                                         setValues(menuItem)
+                                        restValue();
                                     }} />
                                 </div>
 
